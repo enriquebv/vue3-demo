@@ -17,36 +17,42 @@ This document describes the high-level architecture of the repository. Read it t
 #### Colocation Principles
 
 - Components from a common context need to be grouped in a directory.
-  > This helps avoid having an endless folder of loose components and makes it easy to identify which components already exist.
-    ```
-    // ❌ Bad
-    - src/ui/
-      [... other components ...]
-      FormText.vue
-      FormNumber.vue
-      FormSelect.vue
-      [... other components ...]
-      CarCard.vue
-      CardPricing.vue
-      CardList.vue
-      [... other components ...]
 
-    // ✅ Good
-    - src/ui/
-      - src/ui/form
-          FormText.vue
-          FormNumber.vue
-          FormSelect.vue
-      - src/ui/car
-          CarCard.vue
-          CardPricing.vue
-          CardList.vue
-      [... other components ...]
-    ```
+  > This helps avoid having an endless folder of loose components and makes it easy to identify which components already exist.
+
+  ```
+  // ❌ Bad
+  - src/ui/
+    [... other components ...]
+    FormText.vue
+    FormNumber.vue
+    FormSelect.vue
+    [... other components ...]
+    CarCard.vue
+    CardPricing.vue
+    CardList.vue
+    [... other components ...]
+
+  // ✅ Good
+  - src/ui/
+    - src/ui/form
+        FormText.vue
+        FormNumber.vue
+        FormSelect.vue
+    - src/ui/car
+        CarCard.vue
+        CardPricing.vue
+        CardList.vue
+    [... other components ...]
+  ```
 
 #### `src/ui/views`
 
 This is where app pages (`.vue` components) are stored. Like isolated components, views with a common context must be grouped in a directory.
+
+##### `src/ui/views/layouts`
+
+Different UI reusable layouts.
 
 #### `src/domain`
 
@@ -70,7 +76,6 @@ This is where app pages (`.vue` components) are stored. Like isolated components
     useCart.ts -> With methods like "addCart(car: Car)", "checkout()", etc.
     useCars.ts -> With methods like "fetchById(id: Car['id'])", "list(filters: CarListFilters, pagination: CursorPagination)"
 ```
-
 
 #### `src/infrastructure`
 
@@ -126,8 +131,3 @@ This is where app pages (`.vue` components) are stored. Like isolated components
     - Without being coupled, we can write tests in the same way we instruct users on how to use the application (in fact, [the test MUST behave like a user](#must-behave-like-a-user)).
       - We do not tell the user: _Find the button with ID `#submit-action`, data-test attribute `form-submit-action`, and classname `active`, and click it._
       - We tell them: _Find the active "Submit" button and click it._
-
-### CSS
-
-- Use BEM to encapsulate TailwindCSS utilities with `@apply`.
-  > This will abstract our template from TailwindCSS without losing IDE support or DX, enhancing template legibility.
