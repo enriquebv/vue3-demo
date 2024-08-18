@@ -13,7 +13,6 @@ const router = createRouter({
       path: '/',
       meta: { title: 'Reclutamiento' },
       name: ROUTE_NAMES.VACANCY_BOARD,
-      // Note: We do not lazy-load the LoginView component because it is the first view the user will see
       component: VacancyBoardView
     }
     // TODO: Add 404 page
