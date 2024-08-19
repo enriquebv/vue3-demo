@@ -2,17 +2,20 @@
 // Note: This is the main component of the application, it is responsible for rendering the layout and the router view
 // Also, it captures errors in the component tree and shows a dialog with the error message.
 
-import { RouterView } from 'vue-router'
+import { onBeforeRouteLeave, RouterView, useRouter } from 'vue-router'
 import BackofficeLayout from './ui/layouts/BackofficeLayout/BackofficeLayout.vue'
 import { onErrorCaptured, ref } from 'vue'
 import UIDialog from './ui/UIDialog.vue'
 import { handleError } from './utils/error'
 import useErrorHandler from './composables/error-handler'
+import { VacancyNotFoundError } from './infrastructure/api-service/exceptions'
+import { on } from 'events'
 
 useErrorHandler(onError)
 
 const isErrorDialogVisible = ref(false)
 const errorDialogMessage = ref('')
+const router = useRouter()
 
 function onErrorDialogClose() {
   isErrorDialogVisible.value = false
@@ -24,7 +27,21 @@ function showErrorDialog(message: string) {
   errorDialogMessage.value = message
 }
 
+onBeforeRouteLeave(() => {
+  onErrorDialogClose()
+})
+
+function onBackToHomeClick() {
+  onErrorDialogClose()
+  router.push('/')
+}
+
 function onError(error: unknown) {
+  if (error instanceof VacancyNotFoundError) {
+    showErrorDialog('La vacante que buscas no existe.')
+    return
+  }
+
   showErrorDialog(
     'Ha ocurrido un error inesperado, ponte en contacto con el administrador del sistema.'
   )
@@ -51,6 +68,7 @@ onErrorCaptured((error) => {
       :confirm-action="{ label: 'Cerrar', onAction: onErrorDialogClose }"
     >
       <p>{{ errorDialogMessage }}</p>
+      <a href="/" @click.prevent="onBackToHomeClick">Volver al inicio</a>
     </UIDialog>
   </BackofficeLayout>
 </template>

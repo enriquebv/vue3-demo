@@ -7,6 +7,7 @@ const modal = ref<HTMLDialogElement | null>(null)
 interface Action {
   label: string
   onAction: () => void
+  disabled?: boolean
 }
 
 interface Props {
@@ -79,11 +80,17 @@ watch(
       <slot />
     </div>
 
-    <footer class="flex justify-end">
-      <UIButton v-if="props.cancelAction" @click="props.cancelAction.onAction">
+    <footer class="flex justify-end gap-2">
+      <UIButton
+        v-if="props.cancelAction"
+        @click="props.cancelAction.onAction"
+        :disabled="props.cancelAction.disabled"
+      >
         {{ props.cancelAction.label }}
       </UIButton>
-      <UIButton @click="props.confirmAction.onAction">{{ props.confirmAction.label }}</UIButton>
+      <UIButton @click="props.confirmAction.onAction" :disabled="props.confirmAction.disabled">{{
+        props.confirmAction.label
+      }}</UIButton>
     </footer>
   </dialog>
 </template>

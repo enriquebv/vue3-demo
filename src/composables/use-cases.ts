@@ -4,7 +4,7 @@ export default function useUseCases() {
   const apiService = useApiService()
 
   return {
-    vacancyStatus: apiService.vacancyStatus,
+    vacancyStatus: apiService.fetchVacancy,
     vacancyCandidates: apiService.vacancyCandidates,
     addCandidate: apiService.addCandidate,
     editCandidate: apiService.editCandidate
