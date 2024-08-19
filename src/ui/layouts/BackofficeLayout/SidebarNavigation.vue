@@ -16,7 +16,7 @@ import { useRoute } from 'vue-router'
 
 interface LinkProps {
   label: string
-  routeName: string
+  path: string
 }
 
 interface Props {
@@ -56,7 +56,7 @@ const hasActiveChild = computed<boolean>(() => {
         return hasActiveChildRecursive(child.children)
       }
 
-      return route.name === child.routeName
+      return route.path === child.path
     })
   }
 
@@ -135,7 +135,7 @@ const hasActiveChild = computed<boolean>(() => {
         <!-- Render link -->
         <RouterLink
           v-else
-          :to="{ name: item.routeName }"
+          :to="{ path: item.path }"
           :key="`${index}-link`"
           class="pl-4 border-l-2 border-[#6C63FF] py-2 ml-3 block font-semibold"
         >

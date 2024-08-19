@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import SidebarNavigation from './SidebarNavigation.vue'
-import { ROUTE_NAMES } from '@/router'
 import StarIcon from '@/ui/icons/StarIcon.vue'
 import { useRoute } from 'vue-router'
 
@@ -12,7 +11,7 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
     {
       label: 'Talento',
       icon: StarIcon,
-      children: [{ label: 'Reclutamiento', routeName: ROUTE_NAMES.VACANCY_BOARD }]
+      children: [{ label: 'Reclutamiento', path: `/vacancy/${import.meta.env.VITE_VACANCY_ID}` }]
     }
   ]
 }

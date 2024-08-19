@@ -26,11 +26,9 @@ import ContextualMenu from '../ContextualMenu.vue'
           }
         ]"
       >
-        <!-- <UITooltip content="Opciones"> -->
         <button class="min-w-3 min-h-3 cursor-pointer">
           <DotsVerticalIcon />
         </button>
-        <!-- </UITooltip> -->
       </ContextualMenu>
     </header>
 

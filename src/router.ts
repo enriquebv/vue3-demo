@@ -11,6 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      // Note: For demo purposes, we redirect to a specific vacancy
+      redirect: { name: ROUTE_NAMES.VACANCY_BOARD, params: { id: import.meta.env.VITE_VACANCY_ID } }
+    },
+    {
+      path: '/vacancy/:id',
       meta: { title: 'Reclutamiento' },
       name: ROUTE_NAMES.VACANCY_BOARD,
       component: VacancyBoardView
