@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AppLayout from '../layouts/AppLayout.vue'
+import AppBoard from '../AppBoard/AppBoard.vue'
 </script>
 
 <template>
-  <h1>This is an about page</h1>
+  <AppBoard />
 </template>
 
 <style>

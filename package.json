@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "vue-tippy": "^6.4.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.1",

@@ -3,7 +3,11 @@ export default {
   purge: ['./index.html', './src/ui/**/*.{vue,js,ts,jsx,tsx}'],
   content: [],
   theme: {
-    extend: {}
+    extend: {
+      spacing: {
+        sidebar: '256px'
+      }
+    }
   },
   plugins: []
 }

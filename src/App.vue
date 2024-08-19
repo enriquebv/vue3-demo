@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import AppLayout from './ui/layouts/AppLayout.vue'
+import BackofficeLayout from './ui/layouts/BackofficeLayout/BackofficeLayout.vue'
 </script>
 
 <template>
-  <AppLayout>
+  <BackofficeLayout>
     <RouterView />
-  </AppLayout>
+  </BackofficeLayout>
 </template>

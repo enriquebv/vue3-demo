@@ -117,7 +117,7 @@ const hasActiveChild = computed<boolean>(() => {
       <template v-for="(item, index) in props.children">
         <!-- Render sidebar group -->
         <div v-if="isSidebarGroup(item)" :key="`${index}-group`" class="px-2">
-          <SidebarNavigationGroup
+          <SidebarNavigation
             v-if="isSidebarGroup(item)"
             :key="`${index}-group`"
             :label="item.label"
@@ -129,7 +129,7 @@ const hasActiveChild = computed<boolean>(() => {
                 <component :is="item.icon" />
               </div>
             </template>
-          </SidebarNavigationGroup>
+          </SidebarNavigation>
         </div>
 
         <!-- Render link -->

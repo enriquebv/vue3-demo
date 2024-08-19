@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import SidebarNavigationGroup from './AppLayout/SidebarNavigationGroup.vue'
+import SidebarNavigation from './SidebarNavigation.vue'
 import { ROUTE_NAMES } from '@/router'
 import StarIcon from '@/ui/icons/StarIcon.vue'
+import { useRoute } from 'vue-router'
 
-const MENU_CONFIG: InstanceType<typeof SidebarNavigationGroup>['$props'] = {
+const route = useRoute()
+
+const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
   label: 'Administrador',
   children: [
     {
@@ -16,8 +19,8 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigationGroup>['$props'] = {
 </script>
 
 <template>
-  <div class="app-layout">
-    <aside class="app-layout__sidebar w-64 p-2 flex flex-col gap-2 mr-6">
+  <div class="app-layout pr-6 flex bg-[#F1F5F9] min-h-screen w-full">
+    <aside class="app-layout__sidebar p-2 flex flex-col gap-2 bg-white">
       <slot name="logo">
         <div
           class="border-dotted border-2 border-[#CBD5E1] p-4 text-center text-gray-500 rounded-[4px] text-xs"
@@ -26,11 +29,15 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigationGroup>['$props'] = {
         </div>
       </slot>
 
-      <SidebarNavigationGroup :label="MENU_CONFIG.label" :children="MENU_CONFIG.children" />
+      <SidebarNavigation :label="MENU_CONFIG.label" :children="MENU_CONFIG.children" />
     </aside>
 
-    <main>
-      <slot />
+    <main class="app-layout__content flex flex-col pb-2">
+      <h1 class="text-3xl font-bold pt-3">{{ route.meta.title }}</h1>
+
+      <div class="bg-white w-full mt-6 rounded-3xl p-4 flex-1">
+        <slot />
+      </div>
     </main>
   </div>
 
@@ -44,22 +51,21 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigationGroup>['$props'] = {
 
 <style lang="postcss">
 .app-layout {
-  @apply flex bg-[#F1F5F9] min-h-screen;
+  --sidebar-width: theme('spacing.64');
+  --sidebar-gap: theme('spacing.6');
+
+  gap: var(--sidebar-gap);
 
   &__sidebar {
-    @apply w-64 bg-white;
+    min-width: var(--sidebar-width);
     box-shadow:
       10px 0px 6px rgba(108, 99, 255, 0.02),
       1px 0px 2px rgba(108, 99, 255, 0.03),
       4px 0px 4px rgba(108, 99, 255, 0.02);
+  }
 
-    &-wrapper {
-      @apply h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800;
-    }
-
-    &-nav {
-      @apply space-y-2 font-medium;
-    }
+  &__content {
+    width: calc(100% - (var(--sidebar-width) + var(--sidebar-gap)));
   }
 }
 
