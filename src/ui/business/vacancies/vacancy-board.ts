@@ -10,6 +10,8 @@ import UserIcon from '@/ui/icons/UserIcon.vue'
 import type UIBoard from '@/ui/ui-board/UIBoard.vue'
 
 import useVacancy from '@/composables/vacancy'
+import useCandidates from '@/composables/candidates'
+import type VacancyStatus from '@/domain/VacancyStatus'
 
 type BoardColumn = InstanceType<typeof UIBoard>['$props']['columns'][number]
 
@@ -39,19 +41,21 @@ const COLUMN_CONFIG_BY_STAGE_INDEX: Record<number, Pick<BoardColumn, 'color' | '
 
 export default function useVacancyBoard(vacancyId: Vacancy['id']) {
   const { loading, vacancy, refetch: refetchVacancy } = useVacancy(vacancyId)
+  const candidates = useCandidates()
 
-  function onCandidateStatusChange(candidate: Candidate, stageId: string) {
-    console.log('Move candidate to stage', stageId)
+  async function onCandidateStatusChange(candidate: Candidate, stageId: VacancyStatus['id']) {
+    await candidates.changeStatus(candidate, stageId)
+    await refetchVacancy()
   }
 
   function createBoardColumns(vacancy: Vacancy): BoardColumn[] {
-    return vacancy.stages.map((stage, index) => {
+    return vacancy.stages.map((vacancyStatus, index) => {
       return {
-        id: stage.id,
-        title: stage.name,
+        id: vacancyStatus.id,
+        title: vacancyStatus.name,
         color: COLUMN_CONFIG_BY_STAGE_INDEX[index].color,
         titleIcon: COLUMN_CONFIG_BY_STAGE_INDEX[index].titleIcon,
-        cards: stage.candidates.map((candidate) => ({
+        cards: vacancyStatus.candidates.map((candidate) => ({
           id: candidate.id,
           title: `${candidate.firstName} ${candidate.lastName}`,
           content: 'Añadido por ATS',
@@ -59,10 +63,12 @@ export default function useVacancyBoard(vacancyId: Vacancy['id']) {
           actions: [
             {
               label: 'Cambiar estado a ',
-              subactions: vacancy.stages.map((stage) => ({
-                label: stage.name,
-                onClick: () => onCandidateStatusChange(candidate, stage.id)
-              }))
+              subactions: vacancy.stages
+                .filter(({ id }) => vacancyStatus.id !== id) // We don't want to change the status to the same one
+                .map((vacancyStatus) => ({
+                  label: vacancyStatus.name,
+                  onClick: () => onCandidateStatusChange(candidate, vacancyStatus.id)
+                }))
             }
           ]
         }))

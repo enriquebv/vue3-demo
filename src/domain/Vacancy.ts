@@ -1,8 +1,8 @@
-import type VacancyStage from './VacancyStage'
+import type VacancyStatus from './VacancyStatus'
 
 export default class Vacancy {
   constructor(
     readonly id: string,
-    readonly stages: VacancyStage[]
+    readonly stages: VacancyStatus[]
   ) {}
 }

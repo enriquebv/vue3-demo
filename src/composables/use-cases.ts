@@ -7,6 +7,6 @@ export default function useUseCases() {
     vacancyStatus: apiService.fetchVacancy,
     vacancyCandidates: apiService.vacancyCandidates,
     addCandidate: apiService.addCandidate,
-    editCandidate: apiService.editCandidate
+    editCandidate: apiService.persistCandidate
   }
 }

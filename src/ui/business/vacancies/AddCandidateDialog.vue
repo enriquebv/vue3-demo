@@ -50,7 +50,7 @@ async function onSubmit() {
       firstName: form.firstName,
       lastName: form.lastName,
       vacancyId: props.vacancyId,
-      stageId: props.stageOnCreationId
+      statusId: props.stageOnCreationId
     })
     toast.show('success', '¡Candidato añadido!')
     emit('created')

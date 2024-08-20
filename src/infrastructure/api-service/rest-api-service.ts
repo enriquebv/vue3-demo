@@ -2,8 +2,8 @@ import type ApiService from '.'
 
 import Vacancy from '@/domain/Vacancy'
 import Candidate from '@/domain/Candidate'
-import { NotFoundError, VacancyNotFoundError } from './exceptions'
-import VacancyStage from '@/domain/VacancyStage'
+import { NotFoundError, ResponseError, VacancyNotFoundError } from './exceptions'
+import VacancyStatus from '@/domain/VacancyStatus'
 
 interface RestApiServiceOptions {
   domain: `https://${string}`
@@ -53,11 +53,11 @@ export default class RestApiService implements ApiService {
       if (response.status === 404) {
         throw new NotFoundError()
       }
+
+      throw new ResponseError(response)
     }
 
-    const json = await response.json()
-
-    return json
+    return await response.json()
   }
 
   async fetchVacancy(id: Vacancy['id']): Promise<Vacancy> {
@@ -71,12 +71,12 @@ export default class RestApiService implements ApiService {
         .sort((stage) => stage.order)
         .map(
           (stage: any) =>
-            new VacancyStage(
+            new VacancyStatus(
               stage.id,
               stage.name,
               stage.companyId,
               stage.createdAt,
-              candidates.filter((candidate) => candidate.stageId === stage.id)
+              candidates.filter((candidate) => candidate.statusId === stage.id)
             )
         )
 
@@ -116,5 +116,12 @@ export default class RestApiService implements ApiService {
     })
   }
 
-  async editCandidate(candidate: Candidate): Promise<void> {}
+  async persistCandidate(candidate: Candidate): Promise<void> {
+    const endpoint = `/recruitment/v1/candidates/${candidate.id}`
+
+    await this.fetch(endpoint, {
+      method: 'PUT',
+      payload: candidate
+    })
+  }
 }

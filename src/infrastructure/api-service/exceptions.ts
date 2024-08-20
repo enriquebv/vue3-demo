@@ -9,3 +9,9 @@ export class VacancyNotFoundError extends NotFoundError {
     super(`Vacancy with id ${id} not found`)
   }
 }
+
+export class ResponseError extends Error {
+  constructor(readonly reason: unknown) {
+    super('Response error, check the reason property')
+  }
+}
