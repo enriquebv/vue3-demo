@@ -112,28 +112,26 @@ async function onAddCandidate(partial: { firstName: string; lastName: string }) 
 </script>
 
 <template>
-  <SkeletonFallback v-if="loading" />
-  <template v-else>
-    <div class="flex flex-col h-full">
-      <AppTabs :tabs="TABS" :active-tab-id="activeTabId" @change="onTabChange" />
-      <div class="py-4 flex justify-between">
-        <InputText :value="searchTerm" placeholder="Buscar">
-          <template #pre-icon>
-            <EnvelopeIcon />
-          </template>
-        </InputText>
-        <UIButton @click="() => (showAddCandidateDialog = true)"> Añadir candidato </UIButton>
-      </div>
-
-      <UIBoard :columns="boardColumns" class="flex-1" />
+  <div class="flex flex-col h-full">
+    <AppTabs :tabs="TABS" :active-tab-id="activeTabId" @change="onTabChange" />
+    <div class="py-4 flex justify-between">
+      <InputText :value="searchTerm" placeholder="Buscar">
+        <template #pre-icon>
+          <EnvelopeIcon />
+        </template>
+      </InputText>
+      <UIButton @click="() => (showAddCandidateDialog = true)"> Añadir candidato </UIButton>
     </div>
-  </template>
+
+    <SkeletonFallback v-if="loading && !vacancy" />
+    <UIBoard v-els :columns="boardColumns" class="flex-1" />
+  </div>
 
   <AddCandidateDialog
     @close="() => (showAddCandidateDialog = false)"
     @save="onAddCandidate"
     :open="showAddCandidateDialog"
-    :disable-submit="creatingCandidate"
+    :submitting="creatingCandidate"
   />
 </template>
 

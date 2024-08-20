@@ -1,42 +1,37 @@
 <template>
-  <div class="flex min-h-[100dvh] flex-col">
-    <header class="flex h-16 items-center justify-between bg-muted px-4 md:px-6">
-      <div class="animate-pulse rounded-md bg-muted h-8 w-32"></div>
-      <div class="flex items-center space-x-4">
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
+  <div class="grid grid-cols-4 gap-6">
+    <!-- Column 1 -->
+    <div class="bg-white p-4 rounded-lg">
+      <div class="h-6 w-1/2 bg-gray-300 animate-pulse rounded mb-4"></div>
+      <div class="space-y-4">
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
       </div>
-    </header>
-    <main class="flex-1 bg-background px-4 py-8 md:px-6 md:py-12">
-      <div class="grid gap-8">
-        <div class="grid gap-4">
-          <div class="animate-pulse bg-muted h-12 w-full rounded-lg"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-        </div>
-        <div class="grid gap-4">
-          <div class="animate-pulse bg-muted h-12 w-full rounded-lg"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-        </div>
-        <div class="grid gap-4">
-          <div class="animate-pulse bg-muted h-12 w-full rounded-lg"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-          <div class="animate-pulse rounded-md bg-muted h-4 w-full"></div>
-        </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="bg-white p-4 rounded-lg">
+      <div class="h-6 w-1/2 bg-gray-300 animate-pulse rounded mb-4"></div>
+      <div class="space-y-4">
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
       </div>
-    </main>
-    <footer class="flex h-16 items-center justify-between bg-muted px-4 md:px-6">
-      <div class="animate-pulse rounded-md bg-muted h-8 w-32"></div>
-      <div class="flex items-center space-x-4">
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
-        <div class="animate-pulse bg-muted h-8 w-8 rounded-full"></div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="bg-white p-4 rounded-lg">
+      <div class="h-6 w-1/2 bg-gray-300 animate-pulse rounded mb-4"></div>
+      <div class="space-y-4">
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
+        <div class="h-16 bg-gray-300 animate-pulse rounded"></div>
       </div>
-    </footer>
+    </div>
   </div>
 </template>

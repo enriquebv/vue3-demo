@@ -5,7 +5,7 @@ import { reactive, ref } from 'vue'
 
 interface Props {
   open: boolean
-  disableSubmit: boolean
+  submitting: boolean
 }
 
 const props = defineProps<Props>()
@@ -44,11 +44,12 @@ async function onSubmit() {
     :confirm-action="{
       label: 'Añadir',
       onAction: onSubmit,
-      disabled: props.disableSubmit
+      disabled: props.submitting
     }"
     :cancel-action="{
       label: 'Cancelar',
-      onAction: () => emit('close')
+      onAction: () => emit('close'),
+      disabled: props.submitting
     }"
   >
     <form class="grid gap-4" ref="formRef">
