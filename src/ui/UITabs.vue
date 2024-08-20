@@ -8,7 +8,7 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <div class="flex border-[#F1F5F9] border-b-[1px]">
+  <div class="flex border-slate-100 border-b-[1px]">
     <div
       class="relative h-11 flex align-center justify-center px-6"
       v-for="tab in props.tabs"
@@ -18,7 +18,7 @@ const props = defineProps<Props>()
         <button
           :class="{
             'font-bold text-purple-600': tab.id === props.activeTabId,
-            'text-[#E2E8F0]': tab.id !== props.activeTabId
+            'text-slate-200': tab.id !== props.activeTabId
           }"
         >
           {{ tab.label }}

@@ -27,13 +27,13 @@ const selectedColor = computed(() => COLOR_MAP[props.color ?? 'blue'])
     :style="{
       '--board-column-color': selectedColor
     }"
-    class="board-column h-full border-solid border-[1px] border-[#E2E8F0] min-w-72 p-4 rounded-xl"
+    class="board-column h-full border-solid border-[1px] border-slate-200 min-w-72 p-4 rounded-xl"
   >
     <div class="board-column__top-line h-1 w-full rounded-sm mb-2"></div>
 
     <header class="flex gap-1 mb-3">
       <slot name="title-icon" />
-      <p class="font-bold text-[#1F2D52]">{{ props.title }}</p>
+      <p class="font-bold text-accent">{{ props.title }}</p>
     </header>
 
     <div class="flex flex-col gap-2 max-w-full overflow-y-auto">

@@ -23,7 +23,7 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
 </script>
 
 <template>
-  <div class="app-layout pr-6 flex bg-[#F1F5F9] min-h-screen w-full">
+  <div class="app-layout pr-6 flex bg-slate-100 min-h-screen w-full">
     <aside class="app-layout__sidebar p-2 flex flex-col gap-2 bg-white">
       <slot name="logo">
         <div

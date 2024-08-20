@@ -19,9 +19,9 @@ const props = defineProps<Props>()
 
 <template>
   <article
-    class="flex flex-col bg-[#F8FAFC] p-2 border-[1px] border-[#E2E8F0] rounded-xl max-w-72 gap-2 select-none"
+    class="flex flex-col bg-slate-50 p-2 border-[1px] border-slate-200 rounded-xl max-w-72 gap-2 select-none"
   >
-    <header class="flex flex-row flex-nowrap font-semibold text-[#1F2D52]">
+    <header class="flex flex-row flex-nowrap font-semibold text-accent">
       <p class="flex-1 text-ellipsis text-nowrap overflow-hidden">
         {{ props.title }}
       </p>
@@ -33,11 +33,11 @@ const props = defineProps<Props>()
     </header>
 
     <main>
-      <p class="text-xs text-[#64748B]">{{ props.content }}</p>
+      <p class="text-xs text-slate-500">{{ props.content }}</p>
     </main>
 
     <footer>
-      <span class="flex items-center gap-1 text-xs stroke-[#94A3B8] text-[#94A3B8]">
+      <span class="flex items-center gap-1 text-xs stroke-slate-400 text-slate-400">
         <ClockIcon /> <RelativeTime :date="props.date" />
       </span>
     </footer>

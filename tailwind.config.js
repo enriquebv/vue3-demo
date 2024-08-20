@@ -4,6 +4,9 @@ export default {
   content: [],
   theme: {
     extend: {
+      colors: {
+        accent: '#1F2D52'
+      },
       spacing: {
         sidebar: '256px'
       }

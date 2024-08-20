@@ -8,7 +8,7 @@ const props = defineProps<Props>()
 
 <template>
   <button
-    class="text-white py-2 px-3 bg-[#1F2D52] rounded-xl text-sm disabled:bg-[#1f2d52a9]"
+    class="text-white py-2 px-3 bg-accent rounded-xl text-sm disabled:bg-[#1f2d52a9]"
     :disabled="props.disabled"
   >
     <slot />

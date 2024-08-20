@@ -109,7 +109,7 @@ const hasActiveChild = computed<boolean>(() => {
       </svg>
     </summary>
     <div
-      class="rounded-md bg-[#F8FAFC]"
+      class="rounded-md bg-slate-50"
       :class="{
         'pb-2': props.isChild
       }"
