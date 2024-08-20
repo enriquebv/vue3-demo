@@ -7,6 +7,7 @@ import InputText from '@/ui/InputText.vue'
 import UIButton from '@/ui/UIButton.vue'
 import EnvelopeIcon from '@/ui/icons/EnvelopeIcon.vue'
 import UIBoard from '@/ui/ui-board/UIBoard.vue'
+
 import AddCandidateDialog from './AddCandidateDialog.vue'
 import SkeletonFallback from './VacancyBoardSkeleton.vue'
 import useVacancyBoard from './vacancy-board'
@@ -23,6 +24,7 @@ const showAddCandidateDialog = ref(false)
 
 function onCandidateCreated() {
   refetchVacancy()
+  showAddCandidateDialog.value = false
 }
 </script>
 
@@ -36,7 +38,7 @@ function onCandidateCreated() {
     <UIButton @click="() => (showAddCandidateDialog = true)"> Añadir candidato </UIButton>
   </div>
 
-  <SkeletonFallback v-if="loading" />
+  <SkeletonFallback v-if="loading && !vacancy" />
   <UIBoard v-else :columns="columns" class="flex-1" />
 
   <AddCandidateDialog
