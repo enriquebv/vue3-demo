@@ -2,8 +2,7 @@
 import { dateToRelative } from '@/utils/date'
 import { onBeforeMount, onMounted, ref } from 'vue'
 
-// Note: We use an isolated component to perform renders
-// in the lowest possible level
+// Demo: We use an isolated component to perform renders in the lowest possible level
 
 interface Props {
   date: string

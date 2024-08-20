@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import VacancyBoardView from '@/ui/views/VacancyBoardView.vue'
 
-// Note: We centralize route names to avoid typos and make it easier to modify them
+// Demo: We centralize route names to avoid typos and make it easier to modify them
 export const ROUTE_NAMES = {
   VACANCY_BOARD: 'vacancy-board'
 } as const
@@ -11,7 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      // Note: For demo purposes, we redirect to a specific vacancy
+      // Demo: For demo purposes, we redirect to a specific vacancy
       redirect: { name: ROUTE_NAMES.VACANCY_BOARD, params: { id: import.meta.env.VITE_VACANCY_ID } }
     },
     {

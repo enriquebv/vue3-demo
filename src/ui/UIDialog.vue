@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import UIButton from './UIButton.vue'
+import UIButton from '@/ui/UIButton.vue'
 
 const modal = ref<HTMLDialogElement | null>(null)
 
@@ -25,7 +25,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 
-// Note: If the modal is opened by default, open the dialog
+// Demo: If the modal is opened by default, open the dialog
 onMounted(() => {
   if (!modal.value) {
     throw new Error('Modal element is not available')
@@ -36,7 +36,7 @@ onMounted(() => {
   }
 })
 
-// Note: Watch the open prop and open or close the dialog accordingly
+// Demo: Watch the open prop and open or close the dialog accordingly
 watch(
   () => props.open,
   (isOpen) => {

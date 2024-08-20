@@ -9,7 +9,6 @@ const props = defineProps<Props>()
 
 <template>
   <div class="flex border-[#F1F5F9] border-b-[1px]">
-    <!-- Vacantes Tab -->
     <div
       class="relative h-11 flex align-center justify-center px-6"
       v-for="tab in props.tabs"

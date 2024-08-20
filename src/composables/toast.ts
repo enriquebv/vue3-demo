@@ -1,6 +1,6 @@
 import { useToast as baseUseToast } from 'vue-toastification'
 
-// Note: This is a custom composable that wraps the toastification library
+// Demo: This is a custom composable that wraps the toastification library
 // to avoid coupling the toastification library with the rest of the application.
 
 export default function useToast() {

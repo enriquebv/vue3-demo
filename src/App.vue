@@ -1,15 +1,14 @@
 <script setup lang="ts">
-// Note: This is the main component of the application, it is responsible for rendering the layout and the router view
+// Demo: This is the main component of the application, it is responsible for rendering the layout and the router view
 // Also, it captures errors in the component tree and shows a dialog with the error message.
 
 import { onBeforeRouteLeave, RouterView, useRouter } from 'vue-router'
-import BackofficeLayout from './ui/layouts/BackofficeLayout/BackofficeLayout.vue'
+import BackofficeLayout from './ui/layouts/backoffice-layout/BackofficeLayout.vue'
 import { onErrorCaptured, ref } from 'vue'
 import UIDialog from './ui/UIDialog.vue'
 import { handleError } from './utils/error'
 import useErrorHandler from './composables/error-handler'
 import { VacancyNotFoundError } from './infrastructure/api-service/exceptions'
-import { on } from 'events'
 
 useErrorHandler(onError)
 
@@ -49,7 +48,7 @@ function onError(error: unknown) {
   handleError(error)
 }
 
-// Note: Captures errors in the component tree
+// Demo: Captures errors in the component tree
 onErrorCaptured((error) => {
   onError(error)
 

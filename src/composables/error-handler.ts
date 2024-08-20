@@ -15,7 +15,7 @@ export default function useErrorHandler(onError?: (error: unknown) => void) {
     appStore.setLastCapturedError(error)
   }
 
-  // Note: If any error is catched, and composable owner wants to
+  // Demo: If any error is catched, and composable owner wants to
   // handle it, it can pass a callback
   watch(
     () => appStore.lastCapturedError,

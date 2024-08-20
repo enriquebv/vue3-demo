@@ -1,27 +1,38 @@
 <script lang="ts" setup>
-import InputText from '../InputText.vue'
-import UIDialog from '../UIDialog.vue'
 import { reactive, ref } from 'vue'
+
+import InputText from '@/ui/InputText.vue'
+import UIDialog from '@/ui/UIDialog.vue'
+
+import useCandidates from '@/composables/candidates'
+import useErrorHandler from '@/composables/error-handler'
+import useToast from '@/composables/toast'
 
 interface Props {
   open: boolean
-  submitting: boolean
+  vacancyId: string
+  stageOnCreationId: string
 }
 
 const props = defineProps<Props>()
 
 interface Emits {
-  (event: 'save', payload: { firstName: string; lastName: string }): void
+  (event: 'created'): void
   (event: 'close'): void
 }
 
 const emit = defineEmits<Emits>()
 
+const submitting = ref(false)
 const form = reactive({
   firstName: '',
   lastName: ''
 })
 const formRef = ref<HTMLFormElement | null>(null)
+
+const toast = useToast()
+const candidates = useCandidates()
+const errorHandler = useErrorHandler()
 
 async function onSubmit() {
   if (!formRef.value) {
@@ -32,7 +43,22 @@ async function onSubmit() {
     return
   }
 
-  emit('save', form)
+  submitting.value = true
+
+  try {
+    await candidates.add({
+      firstName: form.firstName,
+      lastName: form.lastName,
+      vacancyId: props.vacancyId,
+      stageId: props.stageOnCreationId
+    })
+    toast.show('success', '¡Candidato añadido!')
+    emit('created')
+  } catch (error) {
+    errorHandler.catchError(error)
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
 
@@ -44,12 +70,12 @@ async function onSubmit() {
     :confirm-action="{
       label: 'Añadir',
       onAction: onSubmit,
-      disabled: props.submitting
+      disabled: submitting
     }"
     :cancel-action="{
       label: 'Cancelar',
       onAction: () => emit('close'),
-      disabled: props.submitting
+      disabled: submitting
     }"
   >
     <form class="grid gap-4" ref="formRef">

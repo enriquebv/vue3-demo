@@ -44,6 +44,7 @@ const selectedColor = computed(() => COLOR_MAP[props.color ?? 'blue'])
         :title="card.title"
         :content="card.content"
         :date="card.date"
+        :actions="card.actions"
       />
     </div>
   </article>

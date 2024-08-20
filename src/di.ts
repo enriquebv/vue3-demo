@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import type ApiService from './infrastructure/api-service'
 import RestApiService from './infrastructure/api-service/rest-api-service'
 
-// Note: This file will inject dependencies into the Vue app.
+// Demo: This file will inject dependencies into the Vue app.
 // This is useful to mock dependencies in tests.
 
 export const DEPENDENCY_KEYS = {

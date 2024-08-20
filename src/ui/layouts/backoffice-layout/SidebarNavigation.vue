@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 /**
- * Note: This is a complex component, that uses recursive behaviour to render
+ * Demo: This is a complex component, that uses recursive behaviour to render
  * multi-level sidebar navigation. It can render a SidebarGroup or a RouterLink
  * depending on the children prop.
  *
@@ -30,7 +30,7 @@ interface Props {
 const route = useRoute()
 const props: Props = defineProps<Props>()
 
-// Note: By default, show children
+// Demo: By default, show children
 const isOpen = ref(true)
 
 /**
@@ -48,7 +48,7 @@ function isSidebarGroup(item: Props | LinkProps): item is Props {
   return (item as Props).children !== undefined
 }
 
-// Note: This computed property is used to detect if any child is active to apply styles
+// Demo: This computed property is used to detect if any child is active to apply styles
 const hasActiveChild = computed<boolean>(() => {
   function hasActiveChildRecursive(children: (Props | LinkProps)[]): boolean {
     return children.some((child) => {

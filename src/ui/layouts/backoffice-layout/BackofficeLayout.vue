@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HexagonalAvatar from '@/ui/HexagonalAvatar.vue'
 import SidebarNavigation from './SidebarNavigation.vue'
 import StarIcon from '@/ui/icons/StarIcon.vue'
 import { useRoute } from 'vue-router'
@@ -32,7 +33,10 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
     </aside>
 
     <main class="app-layout__content flex flex-col pb-2">
-      <h1 class="text-3xl font-bold pt-3">{{ route.meta.title }}</h1>
+      <div class="flex justify-between pt-3">
+        <h1 class="text-3xl font-bold">{{ route.meta.title }}</h1>
+        <HexagonalAvatar url="/avatar.jpg" />
+      </div>
 
       <div class="bg-white w-full mt-6 rounded-3xl p-4 flex-1">
         <slot />
@@ -40,7 +44,7 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
     </main>
   </div>
 
-  <!-- Note: Due to demo purposes, responsive sidebar layout is not implemented -->
+  <!-- Demo: Due to demo purposes, responsive sidebar layout is not implemented -->
   <div class="only-on-desktop-wall">
     <h1 class="text-4xl font-bold text-gray-800 text-center">
       Esta aplicación solo está disponible para escritorio.
