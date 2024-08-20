@@ -1,7 +1,7 @@
 import type ApiService from '.'
 
 import Vacancy from '@/domain/Vacancy'
-import type Candidate from '@/domain/Candidate'
+import Candidate from '@/domain/Candidate'
 import { NotFoundError, VacancyNotFoundError } from './exceptions'
 import VacancyStage from '@/domain/VacancyStage'
 
@@ -31,7 +31,10 @@ export default class RestApiService implements ApiService {
     this.token = options.token
   }
 
-  private async fetch(endpoint: string): Promise<any> {
+  private async fetch(
+    endpoint: string,
+    options: { method?: string; payload?: any } = {}
+  ): Promise<any> {
     if (!endpoint.startsWith('/')) {
       throw new Error('Endpoint must start with /')
     }
@@ -41,7 +44,9 @@ export default class RestApiService implements ApiService {
     const response = await fetch(uri, {
       headers: {
         Authorization: `Bearer ${this.token}`
-      }
+      },
+      method: options.method || 'GET',
+      body: options.payload ? JSON.stringify(options.payload) : undefined
     })
 
     if (!response.ok) {
@@ -60,10 +65,19 @@ export default class RestApiService implements ApiService {
       const endpoint = `/recruitment/v1/candidate-status/${id}`
       const { data } = await this.fetch(endpoint)
 
+      const candidates = await this.fetchVacancyCandidates(id)
+
       const stages = [...data]
         .sort((stage) => stage.order)
         .map(
-          (stage: any) => new VacancyStage(stage.id, stage.name, stage.companyId, stage.createdAt)
+          (stage: any) =>
+            new VacancyStage(
+              stage.id,
+              stage.name,
+              stage.companyId,
+              stage.createdAt,
+              candidates.filter((candidate) => candidate.stageId === stage.id)
+            )
         )
 
       return new Vacancy(id, stages)
@@ -76,7 +90,31 @@ export default class RestApiService implements ApiService {
     }
   }
 
-  async addCandidate(candidate: Candidate): Promise<void> {}
+  private async fetchVacancyCandidates(id: Vacancy['id']): Promise<Candidate[]> {
+    const endpoint = `/recruitment/v1/vacancies/${id}/candidates`
+    const { data } = await this.fetch(endpoint)
+
+    return data.map(
+      (candidate: any) =>
+        new Candidate(
+          candidate.id,
+          candidate.firstName,
+          candidate.lastName,
+          id,
+          candidate.statusId,
+          candidate.createdAt
+        )
+    )
+  }
+
+  async addCandidate(candidate: Omit<Candidate, 'id'>): Promise<void> {
+    const endpoint = '/recruitment/v1/candidates'
+
+    await this.fetch(endpoint, {
+      method: 'POST',
+      payload: candidate
+    })
+  }
 
   async editCandidate(candidate: Candidate): Promise<void> {}
 }

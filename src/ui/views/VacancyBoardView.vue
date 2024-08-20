@@ -73,7 +73,13 @@ const boardColumns = computed(() => {
         id: stage.id,
         title: stage.name,
         color: COLUMN_CONFIG_BY_STAGE_INDEX[index].color,
-        titleIcon: COLUMN_CONFIG_BY_STAGE_INDEX[index].titleIcon
+        titleIcon: COLUMN_CONFIG_BY_STAGE_INDEX[index].titleIcon,
+        cards: stage.candidates.map((candidate) => ({
+          id: candidate.id,
+          title: `${candidate.firstName} ${candidate.lastName}`,
+          content: 'Añadido por ATS',
+          date: candidate.createdAt
+        }))
       }
     }
   )

@@ -8,6 +8,7 @@ interface Props {
     title: string
     color: InstanceType<typeof BoardColumn>['$props']['color']
     titleIcon: Component
+    cards: InstanceType<typeof BoardColumn>['$props']['cards']
   }[]
 }
 
@@ -17,10 +18,11 @@ const props = defineProps<Props>()
 <template>
   <div class="flex flex-nowrap overflow-x-auto gap-3">
     <BoardColumn
+      v-for="column in props.columns"
       :title="column.title"
       :color="column.color"
-      v-for="column in props.columns"
       :key="column.id"
+      :cards="column.cards"
     >
       <template #title-icon>
         <component :is="column.titleIcon" />

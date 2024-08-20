@@ -14,6 +14,7 @@ type Color = keyof typeof COLOR_MAP
 interface Props {
   title: string
   color?: Color
+  cards: InstanceType<typeof BoardCard>['$props'][]
 }
 
 const props = defineProps<Props>()
@@ -36,7 +37,14 @@ const selectedColor = computed(() => COLOR_MAP[props.color ?? 'blue'])
     </header>
 
     <div class="flex flex-col gap-2 max-w-full overflow-y-auto">
-      <BoardCard />
+      <BoardCard
+        v-for="card in props.cards"
+        :key="card.id"
+        :id="card.id"
+        :title="card.title"
+        :content="card.content"
+        :date="card.date"
+      />
     </div>
   </article>
 </template>

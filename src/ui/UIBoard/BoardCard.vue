@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import ClockIcon from '../icons/ClockIcon.vue'
 import DotsVerticalIcon from '../icons/DotsVerticalIcon.vue'
-
 import ContextualMenu from '../ContextualMenu.vue'
+import { dateToRelative } from '@/utils/date'
+import RelativeTime from '../RelativeTime.vue'
+
+interface Props {
+  id: string
+  title: string
+  content: string
+  date: string
+}
+
+const props = defineProps<Props>()
 </script>
 
 <template>
@@ -11,7 +21,7 @@ import ContextualMenu from '../ContextualMenu.vue'
   >
     <header class="flex flex-row flex-nowrap font-semibold text-[#1F2D52]">
       <p class="flex-1 text-ellipsis text-nowrap overflow-hidden">
-        Juan Andrés Ortega Montiel TestTestTestTestTestTest
+        {{ props.title }}
       </p>
       <ContextualMenu
         :actions="[
@@ -33,12 +43,12 @@ import ContextualMenu from '../ContextualMenu.vue'
     </header>
 
     <main>
-      <p class="text-xs text-[#64748B]">Añadido por ATS</p>
+      <p class="text-xs text-[#64748B]">{{ props.content }}</p>
     </main>
 
     <footer>
       <span class="flex items-center gap-1 text-xs stroke-[#94A3B8] text-[#94A3B8]">
-        <ClockIcon /> Hoy
+        <ClockIcon /> <RelativeTime :date="props.date" />
       </span>
     </footer>
   </article>
