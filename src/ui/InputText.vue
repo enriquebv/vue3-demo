@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, useSlots } from 'vue'
+import { useSlots } from 'vue'
 
 interface Props {
   value: string

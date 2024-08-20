@@ -1,8 +1,6 @@
 <script setup lang="ts">
 // Demo: This component is a abstraction of the tippy.js library. We are not trying to replicate all the features of the library, just the simple tooltip.
 
-import { defineProps } from 'vue'
-
 interface Props {
   content: string
 }

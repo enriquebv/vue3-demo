@@ -35,7 +35,9 @@ function onCandidateCreated() {
         <EnvelopeIcon />
       </template>
     </InputText>
-    <UIButton @click="() => (showAddCandidateDialog = true)"> Añadir candidato </UIButton>
+    <UIButton @click="() => (showAddCandidateDialog = true)" :disabled="loading">
+      Añadir candidato
+    </UIButton>
   </div>
 
   <BoardSkeleton v-if="loading && !vacancy" />
