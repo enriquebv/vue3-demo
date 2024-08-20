@@ -1,5 +1,8 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 
+// Note this was used from a removed test, but it's a good example of a utility function
+// that prioritizes semantic HTML and accessibility.
+
 /**
  * Get an element by its label text
  * @param wrapper Result of `mount` from `@vue/test-utils`

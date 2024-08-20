@@ -1,14 +1,16 @@
 <script setup lang="ts">
-// Demo: This is the main component of the application, it is responsible for rendering the layout and the router view
-// Also, it captures errors in the component tree and shows a dialog with the error message.
-
-import { onBeforeRouteLeave, RouterView, useRouter } from 'vue-router'
+import { onBeforeRouteLeave, RouterView, useRoute, useRouter } from 'vue-router'
 import BackofficeLayout from './ui/layouts/backoffice-layout/BackofficeLayout.vue'
-import { onErrorCaptured, ref } from 'vue'
+import { computed, onErrorCaptured, ref } from 'vue'
 import UIDialog from './ui/UIDialog.vue'
 import { handleError } from './utils/error'
 import useErrorHandler from './composables/error-handler'
 import { VacancyNotFoundError } from './infrastructure/api-service/exceptions'
+
+// Demo: This is the main component of the application, it is responsible for rendering the layout and the router view
+// Also, it captures errors in the component tree and shows a dialog with the error message.
+
+const route = useRoute()
 
 useErrorHandler(onError)
 
@@ -54,10 +56,12 @@ onErrorCaptured((error) => {
 
   return false
 })
+
+const title = computed(() => (route.meta.title as string) ?? 'Sin titulo')
 </script>
 
 <template>
-  <BackofficeLayout>
+  <BackofficeLayout :title="title">
     <RouterView />
 
     <UIDialog
@@ -67,7 +71,7 @@ onErrorCaptured((error) => {
       :confirm-action="{ label: 'Cerrar', onAction: onErrorDialogClose }"
     >
       <p>{{ errorDialogMessage }}</p>
-      <a href="/" @click.prevent="onBackToHomeClick">Volver al inicio</a>
+      <a class="mt-4 underline" href="/" @click.prevent="onBackToHomeClick">Volver al inicio</a>
     </UIDialog>
   </BackofficeLayout>
 </template>

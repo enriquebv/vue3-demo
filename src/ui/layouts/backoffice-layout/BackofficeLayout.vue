@@ -4,7 +4,11 @@ import SidebarNavigation from './SidebarNavigation.vue'
 import StarIcon from '@/ui/icons/StarIcon.vue'
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
+interface Props {
+  title: string
+}
+
+const props = defineProps<Props>()
 
 const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
   label: 'Administrador',
@@ -34,7 +38,7 @@ const MENU_CONFIG: InstanceType<typeof SidebarNavigation>['$props'] = {
 
     <main class="app-layout__content flex flex-col pb-2">
       <div class="flex justify-between pt-3">
-        <h1 class="text-3xl font-bold">{{ route.meta.title }}</h1>
+        <h1 class="text-3xl font-bold">{{ props.title }}</h1>
         <HexagonalAvatar url="/avatar.jpg" />
       </div>
 
