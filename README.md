@@ -2,6 +2,10 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## Architecture
+
+To familiarize yourself with the codebase, read [ARCHITECTURE.md](./ARCHITECTURE.md).
+
 ## Getting started
 
 ### Pre-requisites
